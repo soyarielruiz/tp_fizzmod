@@ -7,8 +7,10 @@ module.exports = function(app) {
     .get(rutasUsuario.obtener_todos)
     .post(rutasUsuario.crear);
    
-   /*app.route('/usuario/:usuarioId')
+   app.route('/usuario/:idUsuario')
     .get(rutasUsuario.obtener)
     .put(rutasUsuario.modificar)
-    .delete(rutasUsuario.borrar);*/
+
+   app.route('/usuario/:usuario')
+   	.get(rutasUsuario.obtener_existente)
 };
