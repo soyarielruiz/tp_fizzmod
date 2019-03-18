@@ -1,40 +1,29 @@
-'use strict';
-let url = "http:/localhost:3000/";
-const querystring = require('querystring');
+'use strict'
+
+let url = "http://127.0.0.1:3000/"
+const querystring = require('querystring')
+const fetch    = require('node-fetch')
+let path       = require('path')
 
 
 exports.iniciar_sesion = function(req, res) {
-  let request = require("request");
+
   let username  = req.body.nombre_de_usuario
   let email     = req.body.email 
   let rawUrl    = `${url}usuario?nombre_de_usuario=${username}&email=${email}`
-  let parsedUrl = url.parse(rawUrl);
-  let parsedQs = querystring.parse(parsedUrl.query);
-  
-  var options = {
-        url: parsedQs,
-        method: 'get',
-        json: true,
-        body : {
-          nombre_de_usuario : username,
-          email : email
-        },
-    }
+  let user      = {}
 
-  let result = request(options, function (error, response, body) {
-    //if (!error && response.statusCode == 200) {
-      console.log(body) // Show the HTML for the Google homepage. 
-    //}
+  fetch(rawUrl)
+  .then(res => res.json())
+  .then(res => {
+  //do something  
+    res.render('chat.html', { data: JSON.stringify(res) });
+  })
+  .catch(error => {
+    console.error(error)
   })
 
-   /*result.then(function(result) {
-        userDetails = result;
-        console.log("Initialized user details");
-        // Use user details from here
-        console.log(userDetails)
-    }, function(err) {
-        console.log(err);
-    })*/
-   
-  res.send('NOT IMPLEMENTED: Inicio sesion')
+  
+  //res.sendFile(path.join(__dirname + '/../views/chat.html'));
+  //res.send('NOT IMPLEMENTED: Inicio sesion')
 };
