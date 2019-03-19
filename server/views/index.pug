@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="shortcut icon", href="#")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700", rel="stylesheet")
+    link(rel="stylesheet" href="https://unpkg.com/bulma@0.7.4/css/bulma.min.css")
+    link(rel="stylesheet", type="text/css", href="../public/css/login.css")
+  body
+    section(class="hero is-success is-fullheight")
+        div(class="hero-body")
+            div(class="container has-text-centered")
+                div(class="column is-4 is-offset-4")
+                    h3(class="title has-text-grey") Iniciar Sesión
+                    p(class="subtitle has-text-grey") Por favor inicie sesión para continuar
+                    div(class="box")
+                        figure(class="avatar")
+                            img(src="/assets/fizzmod.gif", alt="Fizzmod")
+                        form(action="/iniciar_sesion", method="post")
+                            div(class="field")
+                                div(class="control")
+                                    input(class="input is-large", type="text", placeholder="Nombre de usuario", autofocus="", name="nombre_de_usuario")
+
+                            div(class="field")
+                                div(class="control")
+                                    input(class="input is-large", type="email", placeholder="Tu Email", autofocus="", name="email")
+
+                            button(class="button is-block is-info is-large is-fullwidth") Inicia
+                        
+                    p(class="has-text-grey")
+                        a(href="/registrate") Registrate |
+                        a(href="/olvideUsuario") wwww usuario

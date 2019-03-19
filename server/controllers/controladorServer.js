@@ -1,5 +1,3 @@
-'use strict'
-
 let url = "http://127.0.0.1:3000/"
 const querystring = require('querystring')
 const fetch    = require('node-fetch')
@@ -14,16 +12,14 @@ exports.iniciar_sesion = function(req, res) {
   let user      = {}
 
   fetch(rawUrl)
-  .then(res => res.json())
-  .then(res => {
-  //do something  
-    res.render('chat.html', { data: JSON.stringify(res) });
+  .then(response => res.json())
+  .then(response => {
+    //do something  
+    //res.render('chat', { name: "Ariel"});
+    return  { name: "Ariel", verdad:"mentira"};
   })
   .catch(error => {
     console.error(error)
-  })
 
-  
-  //res.sendFile(path.join(__dirname + '/../views/chat.html'));
-  //res.send('NOT IMPLEMENTED: Inicio sesion')
+  })
 };
