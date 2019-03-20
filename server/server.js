@@ -5,8 +5,10 @@ const bodyParser 	= require('body-parser')
 const http 			= require('http').Server(app)
 const io 			= require('socket.io')(http)
 let path 			= require('path')
+let url 			= "http://127.0.0.1:3000/"
+const fetch    		= require('node-fetch')
 
-let server_controller = require("./controllers/controladorServer")
+//let server_controller = require("./controllers/controladorServer")
 
 
 app.use(express.static(__dirname));
@@ -25,9 +27,27 @@ app.get('/registrate', (req, res) => {
 
 // POST request para inicio de sesion.
 app.post('/iniciar_sesion', (req, res) => {
-	let data = server_controller.iniciar_sesion(req, res)
-	console.log(data)
-	res.render("chat", {name : "AAAAAAAAAAAAAAAAAA"})
+  let username  = req.body.nombre_de_usuario
+  let email     = req.body.email 
+  let rawUrl    = `${url}usuario?nombre_de_usuario=${username}&email=${email}`
+  let user      = {}
+
+  async function get_user() {
+  	await fetch(rawUrl)
+    .then( response => {
+    //do something  
+    //res.render('chat', { name: "Ariel"});
+    //{ name: "Ariel", verdad:"se envia"};
+    console.log(response.json())
+    return response.json()
+    })
+    .catch(error => {
+    console.error(error)
+    })
+  }
+
+  console.log(get_user())
+  res.render("chat", { name : "AAAAAAAAAAAAAAAAAA" })
 });
 
 app.get('/olvideUsuario', (req, res) => {
