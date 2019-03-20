@@ -1,74 +1,72 @@
 'use strict';
 
-let Usuario = require('../modules/modeloMensaje.js');
+let Mensaje = require('../modules/modeloMensaje.js');
 
 exports.obtener_todos = function(req, res) {
-  Usuario.obtener_todos(function(err, user) {
-
-    console.log('Controller')
+  Mensaje.obtener_todos(function(err, message) {
+    
     if (err) {
       res.send(err);
     }
       
-    console.log('Response', user);
-    res.send(user);
+    console.log('Response', message);
+    res.send(message);
   });
 };
 
 
 
 exports.crear = function(req, res) {
-  var nuevoUsuario = new Usuario(req.body);
+  var nuevoMensaje = new Mensaje(req.body);
 
   //handles null error 
-  if(!nuevoUsuario.nombre || !nuevoUsuario.nombre_de_usuario) {
+  if(!nuevoMensaje.cuerpo || !nuevoMensaje.id_usuario) {
     res.status(400).send({ 
       error:true, 
-      message: 'Ingrese Nombre de Usuario' 
+      message: 'Ingrese su mensaje'
     });
   } else {
-    Usuario.crearUsuario(nuevoUsuario, function(err, usuario) {
+    Mensaje.crearMensaje(nuevoMensaje, function(err, message) {
     
       if ( err ) {
         res.send(err);
       }
 
-      res.json(usuario);
+      res.json(message);
     });
   }
 };
 
 
 exports.obtener = function(req, res) {
-  Usuario.obtenerPorId(req.params.idUsuario, function(err, usuario) {
+  Mensaje.obtenerPorId(req.params.idMensaje, function(err, message) {
     if (err) {
       res.send(err);
     }
     
-    res.json(usuario);
+    res.json(message);
   });
 };
 
 
 exports.modificar = function(req, res) {
-  Usuario.actualizarPorId(req.params.idUsuario, new Usuario(req.body), function(err, usuario) {
+  Mensaje.actualizarPorId(req.params.idMensaje, new Mensaje(req.body), function(err, message) {
     
     if (err) {
       res.send(err);
     }
 
-    res.json(usuario);
+    res.json(message);
   });
 };
 
 exports.obtener_existente = function(req, res) {
-  console.log(req.params)
-  Usuario.obtener_existente(req.params.nombre_usuario, req.params.email, function(err, usuario) {
+  Mensaje.obtener_existente(req.params.cuerpo, req.params.email, function(err, message) {
     
     if (err) {
       res.send(err);
     }
 
-    res.json(usuario);
+    res.json(message);
   });
 };

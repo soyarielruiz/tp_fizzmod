@@ -7,7 +7,7 @@ module.exports = function(app) {
     .get(rutasMensaje.obtener_todos)
     .post(rutasMensaje.crear);
    
-   app.route('/usuario/:idUsuario')
+   app.route('/mensaje/:idMensaje')
     .get(rutasMensaje.obtener)
     .put(rutasMensaje.modificar)
 };
