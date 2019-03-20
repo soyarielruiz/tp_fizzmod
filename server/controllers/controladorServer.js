@@ -16,7 +16,7 @@ exports.iniciar_sesion = function(req, res) {
   .then(response => {
     //do something  
     //res.render('chat', { name: "Ariel"});
-    return  { name: "Ariel", verdad:"mentira"};
+    return  { name: "Ariel", verdad:"se envia"};
   })
   .catch(error => {
     console.error(error)

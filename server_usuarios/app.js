@@ -3,7 +3,6 @@ const port 			= process.env.PORT || 3000
 let app 			= express()
 let bodyParser 		= require('body-parser')
 
-
 const mysql = require('mysql')
 // connection configurations
 const my_connect = mysql.createConnection({

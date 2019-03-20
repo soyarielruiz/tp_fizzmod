@@ -1,16 +1,13 @@
 'use strict';
 module.exports = function(app) {
-  var rutasUsuario = require('../controllers/controladorUsuario');
+  var rutasMensaje = require('../controllers/controladorMensajes');
 
   // Routes
-  app.route('/usuario')
-    .get(rutasUsuario.obtener_todos)
-    .post(rutasUsuario.crear);
+  app.route('/mensaje')
+    .get(rutasMensaje.obtener_todos)
+    .post(rutasMensaje.crear);
    
    app.route('/usuario/:idUsuario')
-    .get(rutasUsuario.obtener)
-    .put(rutasUsuario.modificar)
-
-   app.route('/usuario/:usuario')
-   	.get(rutasUsuario.obtener_existente)
+    .get(rutasMensaje.obtener)
+    .put(rutasMensaje.modificar)
 };

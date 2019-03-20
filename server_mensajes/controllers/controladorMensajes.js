@@ -1,6 +1,6 @@
 'use strict';
 
-let Usuario = require('../modules/modeloUsuario.js');
+let Usuario = require('../modules/modeloMensaje.js');
 
 exports.obtener_todos = function(req, res) {
   Usuario.obtener_todos(function(err, user) {

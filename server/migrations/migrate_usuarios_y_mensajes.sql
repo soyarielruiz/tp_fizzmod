@@ -29,8 +29,8 @@ CREATE TABLE status_usuarios (
 CREATE TABLE mensajes(
 	id int auto_increment NOT NULL, 
 	cuerpo varchar(100) NOT NULL,
-	creado_en datetime NOT NULL,
-	actualizado_en datetime NOT NULL,
+	creado_en datetime NOT NULL DEFAULT NOW(),
+	actualizado_en datetime NOT NULL DEFAULT NOW() ON UPDATE NOW(),
 	id_usuario int NOT NULL,
 	id_status int NOT NULL,
 	PRIMARY KEY (id)
