@@ -8,7 +8,7 @@ exports.iniciar_sesion = function(req, res) {
   let username  = req.body.nombre_de_usuario
   let email     = req.body.email 
   let rawUrl    = `${url}usuario?nombre_de_usuario=${username}&email=${email}`
-  let user      = {}
+  let user
 
   /*function conectedUser( response ) {
     console.log(response)
@@ -16,28 +16,30 @@ exports.iniciar_sesion = function(req, res) {
     res.redirect('/inicio_chat')
   }
 
-  async function getUserData( url ) {
-    try {
-      var 
-    }
-      .then(response => {
-    console.log(response)
-    callback(response)
-  })
-  }*/
-  async function getData(rawUrl) {
-    return await fetch(rawUrl).then(response => {
+  function getData(rawUrl) {
+    return 
+    fetch(rawUrl).then(response => {
+      user = res.id
+      console.log(user)
       return res.json()
     })
     .catch(error => {
       console.error(error)
-    })
+    })*/
+
+  retData = async (rawUrl) => {
+    try {
+      const res = await fetch(rawUrl);
+      const {data} = res
+      return data
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  getData(rawUrl).then( function( response ) {
-    console.log(response)
-    user = response
-  })
+  let user = retData(rawUrl)
+  console.log(" finalmente ")
+  console.log(user)
   return user;
 }
 
