@@ -14,20 +14,23 @@ exports.iniciar_sesion = function(req, res) {
     console.log(response)
     console.log("pasa por conected")
     res.redirect('/inicio_chat')
-  }
+  }*/
 
-  function getData(rawUrl) {
-    return 
-    fetch(rawUrl).then(response => {
-      user = res.id
-      console.log(user)
-      return res.json()
+  let func_data = (rawUrl) => {
+    return fetch(rawUrl).then(response => {
+      Promise.all([ response.nombre, response.json()])
+    })
+    .then(([nombre, jsonData])=> {
+        console.log(jsonData)
+        console.log(nombre)
+        return jsonData
     })
     .catch(error => {
       console.error(error)
-    })*/
+    })
+  } 
 
-  retData = async (rawUrl) => {
+  /*retData = async (rawUrl) => {
     try {
       const res = await fetch(rawUrl);
       const {data} = res
@@ -35,9 +38,9 @@ exports.iniciar_sesion = function(req, res) {
     } catch (err) {
       console.log(err)
     }
-  }
+  }*/
 
-  let user = retData(rawUrl)
+  user = func_data(rawUrl)
   console.log(" finalmente ")
   console.log(user)
   return user;

@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    title Chat Application
+    link(rel="shortcut icon", href="#")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  body
+    #chat-app
+      #chat.has-text-centered
+        section.hero.is-success
+          .hero-body
+            .container
+              h1.title Chat
+        section.section.chat-container
+          .container
+            .columns
+              .box.column.is-8.is-offset-2
+                .chat-messages.has-text-left
+                  ul#chat-messages
+                form(action="/send_message", method="post")
+                  .field.has-addons
+                    p.control
+                      input(type='text', class='input', value= user_name, id='nombre')
+                    p.control.is-expanded
+                      input(type='text', class='input', placeholder='Try to say something', id='mensaje')
+                    p.control
+                      input(type='submit', class='button is-success', value='Post')
+        footer
+          .container
+            .content
+              p
+                | Powered by
+                a(href='https://devahoy.com') &nbsp;FIZZMOD
+      script.
+        const socket = io();
+        $('form').submit(function() {
+          const name = $('#nombre').val();
+          const message = $('#mensaje').val();
+
+          socket.emit('chatter', `${name} : ${message}`);
+          $('#mensaje').val('');
+          return false; 
+        });
+
+        socket.on('chatter', function(message) {
+          $('#chat-messages').append($('<li>').text(message));
+        });

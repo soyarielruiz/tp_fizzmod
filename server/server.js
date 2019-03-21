@@ -18,7 +18,8 @@ app.set('view engine', 'pug');
 app.set('views', './views')
 
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Login - Fizzmod Chat'})
+	res.render('message', { user_name: 'AAAAA'})
+  //res.render('index', { title: 'Login - Fizzmod Chat'})
 });
 
 app.get('/registrate', function (req, res) {
@@ -50,8 +51,12 @@ app.get('/olvideUsuario', (req, res) => {
 	res.sendFile(path.join(__dirname + '/views/index.html'));
 })
 
-io.on('connection', () =>{
-  console.log('a user is connected')
+io.on('connection', (socket) => {
+  console.log('a user connected')
+  socket.on('chatter', (message) => {
+    console.log('chatter : ', message)
+    io.emit('chatter', message)
+  })
 })
 
 var server = http.listen(port, () => {
