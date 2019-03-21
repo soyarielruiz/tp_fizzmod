@@ -8,7 +8,7 @@ let path 			= require('path')
 let url 			= "http://127.0.0.1:3000/"
 const fetch    		= require('node-fetch')
 
-//let server_controller = require("./controllers/controladorServer")
+let server_controller = require("./controllers/controladorServer")
 
 
 app.use(express.static(__dirname));
@@ -18,37 +18,33 @@ app.set('view engine', 'pug');
 app.set('views', './views')
 
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Login - Fizzmod Chat'});
+  res.render('index', { title: 'Login - Fizzmod Chat'})
 });
 
-app.get('/registrate', (req, res) => {
-	res.sendFile(path.join(__dirname + '/views/messages.html'));
-})
+app.get('/registrate', function (req, res) {
+  res.render('new_user', { title: 'Create User - Fizzmod Chat'})
+});
 
 // POST request para inicio de sesion.
 app.post('/iniciar_sesion', (req, res) => {
-  let username  = req.body.nombre_de_usuario
-  let email     = req.body.email 
-  let rawUrl    = `${url}usuario?nombre_de_usuario=${username}&email=${email}`
-  let user      = {}
-
-  async function get_user() {
-  	await fetch(rawUrl)
-    .then( response => {
-    //do something  
-    //res.render('chat', { name: "Ariel"});
-    //{ name: "Ariel", verdad:"se envia"};
-    console.log(response.json())
-    return response.json()
-    })
-    .catch(error => {
-    console.error(error)
-    })
-  }
-
-  console.log(get_user())
-  res.render("chat", { name : "AAAAAAAAAAAAAAAAAA" })
+  let result = server_controller.guardarUsuario( req, res )
+  console.log(result)
+  res.render('chat', { title: 'Inicio bien!!'})
 });
+
+app.get('/inicio_chat', (req, res) => {
+	console.log(req)
+	res.render('chat', { title: 'Inicio bien!!'})
+})
+
+app.post('/guardarUsuario', (req, res) => {
+	let result = server_controller.guardarUsuario( req, res, res.redirect('/conectarUsuario') )
+})
+
+app.get('/conectarUsuario', (req, res) => {
+	console.log(req)
+	res.render('index', { title: 'Creado!!!'})
+})
 
 app.get('/olvideUsuario', (req, res) => {
 	res.sendFile(path.join(__dirname + '/views/index.html'));
