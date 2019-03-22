@@ -12,52 +12,102 @@ html
 		div(class="hero-body")
 			div(class="container has-text-centered")
 				div(class="column is-6 is-offset-3")
-					h3(class="title has-text-grey") Regístrese
+					if update
+						h3(class="title has-text-grey") Actualice sus datos
+					else
+						h3(class="title has-text-grey") Regístrese
 					div(class="box")
 						figure(class="avatar")
 							img(src="/assets/fizzmod.gif", alt="Fizzmod")
 
-						form(action="/guardarUsuario", method="post")
-							div(class="field is-horizontal")
-								div(class="field-label is-normal")
-									label(class="label") Nombre
+						if update
+							form(action="/actualizarUsuario", method="post")
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Nombre
 
-								div(class="field-body")
-									div(class="field")
-										div(class="control")
-											input(class="input" type="text" placeholder="Nombre" name="nombre")
-
-							div(class="field is-horizontal")
-								div(class="field-label is-normal")
-									label(class="label") Apellido
-
-								div(class="field-body")
-									div(class="field")
-										div(class="control")
-											input(class="input" type="text" placeholder="Apellido" name="apellido")
-
-							div(class="field is-horizontal")
-								div(class="field-label is-normal")
-									label(class="label") Nombre de usuario
-
-								div(class="field-body")
-									div(class="field")
-										div(class="control")
-											input(class="input" type="text" placeholder="Nombre de usuario" name="nombre_de_usuario")
-
-							div(class="field is-horizontal")
-								div(class="field-label is-normal")
-									label(class="label") Email
-
-								div(class="field-body")
-									div(class="field")
-										p(class="control is-expanded")
-											input(class="input" type="email" placeholder="Email" name="email")
-
-
-							div(class="field is-horizontal")
-								div(class="field-label")
-									div(class="field-body is-normal")
+									div(class="field-body")
 										div(class="field")
 											div(class="control")
-											button(class="button is-primary") Send message
+												input(class="input" type="text" placeholder="Nombre" name="nombre" value= nombre)
+
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Apellido
+
+									div(class="field-body")
+										div(class="field")
+											div(class="control")
+												input(class="input" type="text" placeholder="Apellido" name="apellido" value= apellido)
+
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Nombre de usuario
+
+									div(class="field-body")
+										div(class="field")
+											div(class="control")
+												input(class="input" type="text" placeholder="Nombre de usuario" name="nombre_de_usuario" value=username)
+
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Email
+
+									div(class="field-body")
+										div(class="field")
+											p(class="control is-expanded")
+												input(class="input" type="email" placeholder="Email" name="email" value=email)
+								input(type="hidden" value=id_usuario name="id_usuario")
+
+								div(class="field is-horizontal")
+									div(class="field-label")
+										div(class="field-body is-normal")
+											div(class="field")
+												div(class="control")
+												button(class="button is-primary") Actualizar
+						else
+							form(action="/guardarUsuario", method="post")
+								
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Nombre
+
+									div(class="field-body")
+										div(class="field")
+											div(class="control")
+												input(class="input" type="text" placeholder="Nombre" name="nombre")
+
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Apellido
+
+									div(class="field-body")
+										div(class="field")
+											div(class="control")
+												input(class="input" type="text" placeholder="Apellido" name="apellido")
+
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Nombre de usuario
+
+									div(class="field-body")
+										div(class="field")
+											div(class="control")
+												input(class="input" type="text" placeholder="Nombre de usuario" name="nombre_de_usuario")
+
+								div(class="field is-horizontal")
+									div(class="field-label is-normal")
+										label(class="label") Email
+
+									div(class="field-body")
+										div(class="field")
+											p(class="control is-expanded")
+												input(class="input" type="email" placeholder="Email" name="email")
+
+
+								div(class="field is-horizontal")
+									div(class="field-label")
+										div(class="field-body is-normal")
+											div(class="field")
+												div(class="control")
+												button(class="button is-primary") Guardar

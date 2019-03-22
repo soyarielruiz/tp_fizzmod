@@ -11,6 +11,6 @@ module.exports = function(app) {
     .get(rutasUsuario.obtener)
     .put(rutasUsuario.modificar)
 
-   app.route('/usuario/:usuario')
+   app.route('/traer_usuario/:nombre_usuario/:email')
    	.get(rutasUsuario.obtener_existente)
 };

@@ -5,12 +5,10 @@ let Usuario = require('../modules/modeloUsuario.js');
 exports.obtener_todos = function(req, res) {
   Usuario.obtener_todos(function(err, user) {
 
-    console.log('Controller')
     if (err) {
       res.send(err);
     }
-      
-    console.log('Response', user);
+
     res.send(user);
   });
 };
@@ -62,13 +60,11 @@ exports.modificar = function(req, res) {
 };
 
 exports.obtener_existente = function(req, res) {
-  console.log(req.params)
   Usuario.obtener_existente(req.params.nombre_usuario, req.params.email, function(err, usuario) {
     
     if (err) {
       res.send(err);
     }
-
-    res.json(usuario);
+    return res.json(usuario);
   });
 };

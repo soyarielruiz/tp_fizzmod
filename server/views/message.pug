@@ -9,6 +9,10 @@ html
   body
     #chat-app
       #chat.has-text-centered
+        div.navbar-start
+            div.navbar-item
+              div.buttons
+                a(button.is-light, href="/actualizar/"+user_id) Profile
         section.hero.is-success
           .hero-body
             .container
@@ -22,24 +26,26 @@ html
                 form(action="/send_message", method="post")
                   .field.has-addons
                     p.control
-                      input(type='text', class='input', value= user_name, id='nombre')
+                      input(type='text', class='input', value=user_name , id='nombre', readonly) 
                     p.control.is-expanded
-                      input(type='text', class='input', placeholder='Try to say something', id='mensaje')
+                      input(type='text', class='input', placeholder='Escribe algo', id='mensaje')
                     p.control
                       input(type='submit', class='button is-success', value='Post')
+                    input(type='hidden', value=user_id, id='id_usuario')
         footer
           .container
             .content
               p
                 | Powered by
-                a(href='https://devahoy.com') &nbsp;FIZZMOD
+                a(href='https://www.linkedin.com/in/ariel-ruiz/') &nbsp; Ariel Ruiz
       script.
         const socket = io();
         $('form').submit(function() {
           const name = $('#nombre').val();
           const message = $('#mensaje').val();
+          const user_id = $('#id_usuario').val();
 
-          socket.emit('chatter', `${name} : ${message}`);
+          socket.emit('chatter', `${name} : ${message}`, message, user_id);
           $('#mensaje').val('');
           return false; 
         });

@@ -29,7 +29,6 @@ Usuario.crearUsuario = function crearUsuario(nuevoUsuario, result) {
             console.log("Error: ", err);
             result(err, null);
         } else {
-            console.log(res.insertId);
             result(null, res.insertId);
         }
     });
@@ -61,15 +60,15 @@ Usuario.actualizarPorId = function actualizarPorId(id, usuario, result){
     }); 
 };
 
-Usuario.obtener_existente = function obtener_existente(nombre_usuario, email, result){
-    sql.query(`SELECT * FROM usuarios WHERE nombre_de_usuario = ? AND email = ? `, nombre_usuario, email, function (err, res) {             
+Usuario.obtener_existente = function obtener_existente(nombre_usuario, email, result) {
+    sql.query(`SELECT * FROM usuarios WHERE nombre_de_usuario = ? AND email = ? `,  [nombre_usuario, email] , function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(err, null);
         } else {
             result(null, res);
         }
-    });   
+    });
 };
 
 
