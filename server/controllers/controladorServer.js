@@ -11,7 +11,13 @@ exports.iniciar_sesion = async function(req, res) {
   let rawUrl    = `${url}traer_usuario/${username}/${email}`
   let user
   
-  user = await fetch(rawUrl).then((response) => response.json()).catch( (err) => console.log(err))
+  user = await fetch(rawUrl).then((response) => response.json()).catch( (err) => {
+    return false
+  })
+  
+  if (user === undefined || user.length === 0) {
+    return false
+  }
   return user;
 }
 
@@ -25,7 +31,7 @@ exports.get_data_user = async function( req, res) {
 }
 
 exports.guardarUsuario = function( req, res, callback ) {
-  let rawUrl    = `${url}usuario/${user_id}`
+  let rawUrl    = `${url}usuario`
   let data      = {
       nombre: req.body.nombre,
       apellido: req.body.apellido,

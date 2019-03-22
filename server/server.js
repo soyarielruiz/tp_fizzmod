@@ -20,6 +20,10 @@ app.get('/', function (req, res) {
 	res.render('index', { title: 'Login - Fizzmod Chat'})
 });
 
+app.get('/logout', function (req, res) {
+	res.render('index', { title: 'Logout - Fizzmod Chat'})
+});
+
 app.get('/chat', function (req, res) {
 	res.render('message', { user_name: 'AAAAA'})
 })
@@ -46,8 +50,12 @@ app.get('/actualizar/:id', async function ( req, res) {
 // POST request para inicio de sesion.
 app.post('/iniciar_sesion', async (req, res) => {
   let result = await server_controller.iniciar_sesion( req, res )
-  let user_data = result[0]
-  res.render('message', { user_name: user_data.nombre, user_id: user_data.id })
+  if (result) {
+  	let user_data = result[0]
+  	res.render('message', { user_name: user_data.nombre, user_id: user_data.id })	
+  } else {
+  	res.redirect('/')
+  }
 });
 
 app.post('/guardarUsuario', (req, res) => {

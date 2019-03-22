@@ -1,18 +1,21 @@
 doctype html
 html
   head
-    title Chat Application
-    link(rel="shortcut icon", href="#")
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+      title Chat Application
+      link(rel="shortcut icon", href="#")
+      link(rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css")
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   body
     #chat-app
       #chat.has-text-centered
-        div.navbar-start
-            div.navbar-item
-              div.buttons
-                a(button.is-light, href="/actualizar/"+user_id) Profile
+        nav(class="navbar" role="navigation" aria-label="dropdown navigation")
+          div(class="navbar-item has-dropdown is-active")
+            a(class="navbar-link") Usuario
+              div(class="navbar-dropdown")
+                a(class="navbar-item", href="/actualizar/"+user_id) Perfil
+                a(class="navbar-item", href="/logout") Logout
+
         section.hero.is-success
           .hero-body
             .container
